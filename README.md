@@ -1,19 +1,30 @@
-# Maths Problem Solver & Tutor
+## Takım İsmi:
+Bootcamp Group 182
 
-## Proje Üyeleri:
+## Takım Üyeleri:
 Ayşe Ceren Şahin
 
-## Proje Konusu:
-Öğrenciler tarafından sorulan matematik problemlerini çözüp nasıl çözdüğünü özetleyen bir chatbot. Çözebildiği konular: 
+## Ürün Açıklaması:
+Öğrenciler tarafından sorulan matematik problemlerini çözüp nasıl çözdüğünü özetleyen bir chatbot
+
+## Ürün Özellikleri:
+
+### Solver'ın çözebildiği konular: 
 1. Basit dört işlem
 2. Geometrik şekillerin alan ve çevre hesaplaması
 3. Basit tek bilinmeyenli denklemler
 4. Basit problemler
 
-## Tech Stack:
+### Ürün Tech Stack:
 - Tokenizer ve Model Train için: Google FLAN-T5 Pre-trained Model
 - Soru/cevap çiftlerini tutmak için: Excel
 - (Sprint 2&3'te) Web tabanlı uygulama geliştirme için: FastAPI
+
+## Ürün İsmi:
+Math Solver & Tutor
+
+## Hedef Kitle:
+Matematik problemleri çözmeye yeni başlayan ilkokul öğrencileri 
 
 ## Sprint 1 - Total 100 puan:
 
