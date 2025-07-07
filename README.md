@@ -26,11 +26,26 @@ Math Solver & Tutor
 ## Hedef Kitle:
 Matematik problemleri çözmeye yeni başlayan ilkokul öğrencileri 
 
+## Product Backlog Url:
+[Notion Link](https://www.notion.so/Math-Solver-Tutor-Product-Backlog-22938967824d8077a2aadf84cb9cf02f?source=copy_link)
+
 ## Sprint 1 - Total 100 puan:
 
 - 20 puan - LLM trainlemek adına soru ve cevaplarından oluşan excel dosyası oluşturma
 - 50 puan - pre-trained model ve tokenizer ile data training
-- 30 puan - karşılıklı konuşan chatbot'un başlangıcı. Eğer cevap hallucation yüzünden yanlış ise doğru cevap ile override etmek
+- 30 puan - karşılıklı konuşan chatbot'un başlangıcı
+
+
+### Ürün Durumu ve Board Screenshot:
+  ![Durum](https://github.com/cerensah/Bootcamp-Group-182/blob/main/urunDurumu.png)
+  ![BacklogSS](https://github.com/cerensah/Bootcamp-Group-182/blob/main/backlog.png)
+### Sprint Review:
+  - Sprint için planan aşamalar tamamlandı. Chatbot'a sorular sorularak test edildi. İngilizce dil seçeneği beğenildi, Türkçe de eklenmesine karar verildi.
+  - Sprint Review Katılımcıları: Ceren Şahin
+       
+### Sprint Retrospective:
+  - Henüz data sayısı az olduğu için yanlış cevaplar verdiği not edildi. 4 işlem soruları için ekstra bir fonksiyon yazılarak yanlış cevaplar doğruları ile override edildi.
+  - Alakasız bir soru sorulduğunda uyarı verme ve hedef kitle çocuk olduğu için kelime filtresi eklenebileceği düşünüldü.
 
 ## Sprint 2 ve 3 için planlar (Total 250 puan):
 
