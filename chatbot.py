@@ -55,8 +55,6 @@ def override_answer(llm_text, correct_answer):
     return re.sub(r'(-?\d+\.?\d*)(?!.*\d)', str(correct_answer), llm_text)
 
 
-print(" \n\n\n\n\n\n Welcome to Math Tutor Chat! Type 'exit' to quit.\n")
-
 def get_llm_response(question: str):
     inputs = tokenizer(f"Question: {question} Answer:", return_tensors="pt")
     outputs = model.generate(**inputs, max_length=128)
@@ -71,15 +69,3 @@ def final_answer(question: str):
         return f"{correct}\n\n"
     return f"{llm_ans}"
 
-while True:
-    question = input("You: ")
-    if question.lower() == "exit":
-        print("?? Goodbye!")
-        break
-
-    correct = solve_math_question(question)
-
-    prompt = f"Question: {question} Answer:"
-    inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=128)
-    outputs = model.generate(**inputs, max_length=128, num_beams=2, do_sample=False)
-    final_answer(question)
