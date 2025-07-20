@@ -18,7 +18,8 @@ Ayşe Ceren Şahin
 ### Ürün Tech Stack:
 - Tokenizer ve Model Train için: Google FLAN-T5 Pre-trained Model
 - Soru/cevap çiftlerini tutmak için: Excel
-- (Sprint 2&3'te) Web tabanlı uygulama geliştirme için: FastAPI
+- Web tabanlı uygulama geliştirme için: Gradio
+- Image-to-text çeviri için: Tesseract OCR
 
 ## Ürün İsmi:
 Math Solver & Tutor
@@ -29,7 +30,14 @@ Matematik problemleri çözmeye yeni başlayan ilkokul öğrencileri
 ## Product Backlog Url:
 [Notion Link](https://www.notion.so/Math-Solver-Tutor-Product-Backlog-22938967824d8077a2aadf84cb9cf02f?source=copy_link)
 
-## Sprint 1 - Total 100 puan:
+### Sprint 1 - Total 100 puan:
+<details>
+
+<summary> Sprint 1 - Detaylar İçin Tıklayın </summary>
+
+
+<br/>
+
 
 - 20 puan - LLM trainlemek adına soru ve cevaplarından oluşan excel dosyası oluşturma
 - 50 puan - pre-trained model ve tokenizer ile data training
@@ -37,8 +45,23 @@ Matematik problemleri çözmeye yeni başlayan ilkokul öğrencileri
 
 
 ### Ürün Durumu ve Board Screenshot:
-  ![Durum](https://github.com/cerensah/Bootcamp-Group-182/blob/main/urunDurumu.png)
-  ![BacklogSS](https://github.com/cerensah/Bootcamp-Group-182/blob/main/backlog.png)
+
+  <p align="center">
+  <img src="https://github.com/cerensah/Bootcamp-Group-182/blob/main/urunDurumu.png" width="750" />
+  <br>
+  <em> Terminal üzerinden prompt ile soru sorma.</em>
+</p>
+
+
+<br/>
+
+
+  <p align="center">
+  <img src="https://github.com/cerensah/Bootcamp-Group-182/blob/main/urunDurumu.png" width="750" />
+  <br>
+  <em> Sprint 1 Backlog.</em>
+</p>
+
 ### Sprint Review:
   - Sprint için planan aşamalar tamamlandı. Chatbot'a sorular sorularak test edildi. İngilizce dil seçeneği beğenildi, Türkçe de eklenmesine karar verildi.
   - Sprint Review Katılımcıları: Ceren Şahin
@@ -47,9 +70,66 @@ Matematik problemleri çözmeye yeni başlayan ilkokul öğrencileri
   - Henüz data sayısı az olduğu için yanlış cevaplar verdiği not edildi. 4 işlem soruları için ekstra bir fonksiyon yazılarak yanlış cevaplar doğruları ile override edildi.
   - Alakasız bir soru sorulduğunda uyarı verme ve hedef kitle çocuk olduğu için kelime filtresi eklenebileceği düşünüldü.
 
-## Sprint 2 ve 3 için planlar (Total 250 puan):
+</details>
+
+### Sprint 2 - Total 150 puan:
+<details>
+
+<summary> Sprint 2 - Detaylar İçin Tıklayın </summary>
+
+<br/>
+
+- 20 puan - Daha çeşitli soru oluşturmak ve soru sayısını arttırarak cevap kalitesini yükseltmek
+
+- 20 puan - Türkçe dil seçeneği eklenmesi
+  
+- 50 puan - Gradio yardımı ile web-tabanlı app yapımı
+  
+- 60 puan - Tesseract OCR ile Gradio üzerinden yüklenilen soru fotoğraflarının algılanması
+
+
+### Ürün Durumu ve Board Screenshot:
+
+  <p align="center">
+  <img src="https://github.com/cerensah/Bootcamp-Group-182/blob/main/urunSprint2.png" width="750" />
+  <br>
+  <em> Yazılı prompt ile soru sorma.</em>
+</p>
+
+
+<br/>
+
+
+  <p align="center">
+  <img src="https://github.com/cerensah/Bootcamp-Group-182/blob/main/urunSprint_resimAlgilama.png" width="750" />
+  <br>
+  <em> Resim yükleme ile soru sorma. Aşağıda görülen "if 2x + 5 = 11, what is x?" fotoğrafından Tesseract ile soru algılanıyor ve cevap veriliyor.</em>
+</p>
+
+
+<br/>
+
+
+  <p align="center">
+  <img src="https://github.com/cerensah/Bootcamp-Group-182/blob/main/backlog_sprint2.png" width="750" />
+  <br>
+  <em> Sprint 2 Backlog.</em>
+</p>
+
+
+### Sprint Review:
+  - Türkçe dil desteği dışındaki planan aşamalar tamamlandı. Gradio ile web tabanlı uygulama çalıştırılıp yazılı prompt ve foto prompt test edildi.
+  - Sprint Review Katılımcıları: Ceren Şahin
+       
+### Sprint Retrospective:
+  - Data sayısının artması ile cevap kalitesinin arttığı görüldü ancak hala yetersiz olduğuna karar verildi.
+  - Daha kaliteli cevaplar için WolframAlpha ve benzeri bir bilgi motoru framework'e eklenebilir
+  - El yazısı ile bir soru yüklendiğinde Tesseract'in algılamada zorlandığı görüldü. Kontrast arttırma ve fotoğraf keskinleştirme gibi filtreler koyarak algılama yükseltilebilir.
+
+</details>
+
+## Sprint 3 için planlar (Total 160 puan):
 
 - 50 puan - Excel dosyasındaki soru ve cevapları arttırmak. Ayrıca data çeşitliğini arttırarak farklı dillerde (türkçe, ingilizce ve belki fransızca) çalışmasını sağlamak
-- 50 puan - Model fine-tuning ile cevapların kalitesini düzeltmek
-- 80 puan - Web tabanlı bir uygulama yaparak chat'i daha erişilebilir yapmak.
-- 70 puan (vakit kalırsa) - yazıyla soru sormaya ek olarak resim yükleyerek soru sorma özelliği getirmek
+- 70 puan - Cevap kalitesini arttırmak için python için ve farklı bilgi motorlarını karıştırmak
+- 40 puan - Kullanıcının sorduğu konulara göre, çalışabilmesi için yeni soru önerilerinde bulunmak
