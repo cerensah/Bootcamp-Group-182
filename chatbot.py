@@ -1,71 +1,104 @@
-import re
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
-from sympy import symbols, Eq, solve
+import gradio as gr
+import wolframalpha
 
-tokenizer = AutoTokenizer.from_pretrained("./math_tutor_model")
-model = AutoModelForSeq2SeqLM.from_pretrained("./math_tutor_model")
+# WolframAlpha client setup
+app_id = "K39W4234KH"
+client = wolframalpha.Client(app_id)
+
+# List of keywords that indicate a likely math question
+MATH_KEYWORDS = ["calculate", "solve", "simplify", "integrate", "derive", "equation", "probability", "function", "plot", "+", "-", "*", "/", "^", "=", "area", "volume", "perimeter", "square", "circle", "triangle", "limit", "mean", "median", "mode"]
+
+def is_math_question(question: str) -> bool:
+    question_lower = question.lower()
+    return any(keyword in question_lower for keyword in MATH_KEYWORDS)
 
 
-def solve_math_question(question: str):
+def ask_wolfram(query: str) -> str:
     try:
-        # 4 işlem soruları için override
-        expression = re.findall(r"[\d\+\-\*/\(\)\.\s]+", question)
+        res = client.query(query, timeout=20)  # 20 seconds timeout
 
-        # x'i bulma tarzı sorular için sympy ile override
-        if "x" in question:
-            return solve_equation_from_text(question)
-        
-        if expression:
-            result = eval(expression[0])
-            return round(result, 4)
-        
-        # havuz problemi, araba hızı tarzı problemler için override
-        if "car" in question and "km" in question:
-            match = re.findall(r'(\d+)\s*km.*?(\d+)\s*km/h.*?(\d+)\s*km/h', question)
-            if match:
-                dist, sp1, sp2 = map(int, match[0])
-                time = dist / (sp1 + sp2)
-                return round(time, 2)
+        # Check if WolframAlpha says it succeeded
+        if res['@success'] == 'false':
+            return "I couldn't solve this question. Please try rephrasing it."
 
-        if "pool" in question and "minute" in question:
-            match = re.findall(r'(\d+)\s*liters?.*?(\d+)\s*minutes?', question)
-            if match:
-                rate, time = map(int, match[0])
-                return rate * time
+        # Iterate through pods and subpods to find plaintext answers
+        for pod in res.pods:
+            if pod.title and 'result' in pod.title.lower():
+                for sub in pod.subpods:
+                    if sub.plaintext:
+                        return sub.plaintext
+
+        # If no "Result" pod, fallback to first pod with plaintext
+        for pod in res.pods:
+            for sub in pod.subpods:
+                if sub.plaintext:
+                    return sub.plaintext
+
+        return "Sorry, I couldn't find a result."
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return "⚠️ An error occurred while contacting WolframAlpha."
 
 
-    except:
-        return None
+import requests
 
-def solve_equation_from_text(text):
-    match = re.search(r"(\d*)x\s*\+\s*(\d+)\s*=\s*(\d+)", text)
-    if match:
-        a, b, c = map(int, match.groups())
-        x = symbols('x')
-        eq = Eq(a*x + b, c)
-        solution = solve(eq, x)
-        steps = f"Step 1: Start with equation {a}x + {b} = {c}\n"
-        steps += f"Step 2: Subtract {b} from both sides: {a}x = {c - b}\n"
-        steps += f"Step 3: Divide both sides by {a}: x = {(c - b)/a}\n"
-        return f"The solution is x = {solution[0]}\n\n{steps}"
-    return "Sorry, I couldn't parse the equation."
+def ask_wolfram_steps(query):
+    url = "https://api.wolframalpha.com/v2/query"
+    params = {
+        "input": query,
+        "appid": app_id,
+        "output": "json",
+        "podstate": "Step-by-step solution"
+    }
+
+    try:
+        response = requests.get(url, params=params, timeout=30)
+        response.raise_for_status()
+        data = response.json()
+
+        if not data.get("queryresult") or not data["queryresult"].get("success"):
+            return "❌ WolframAlpha couldn't understand the question."
+
+        pods = data["queryresult"].get("pods", [])
+        if not pods:
+            return "❌ No information available for this query."
+
+        # Step-by-step or Solution pods
+        step_pods = [
+            pod for pod in pods
+            if 'step' in pod['title'].lower() or 'solution' in pod['title'].lower()
+        ]
+
+        if step_pods:
+            texts = []
+            for pod in step_pods:
+                for sub in pod.get('subpods', []):
+                    if sub.get('plaintext'):
+                        texts.append(sub['plaintext'])
+            return "\n\n".join(texts) or "✅ Found a pod, but it had no readable steps."
+
+        # Fallback to Result pod
+        for pod in pods:
+            if 'result' in pod['title'].lower():
+                for sub in pod.get('subpods', []):
+                    if sub.get('plaintext'):
+                        return sub['plaintext']
+
+        return "⚠️ No step-by-step or result found."
+
+    except Exception as e:
+        return f"⚠️ Error contacting WolframAlpha: {str(e)}"
+
+
+def final_answer(user_input: str) -> str:
+
+    if not is_math_question(user_input):
+        return "Please ask math-related questions only, such as solving equations, geometry, arithmetic, etc."
     
-def override_answer(llm_text, correct_answer):
-    #Eğer llm cevabı yanlış ise doğru cevap ile değiştirme
-    return re.sub(r'(-?\d+\.?\d*)(?!.*\d)', str(correct_answer), llm_text)
+    answer = ask_wolfram_steps(user_input)
+    return f"**Answer**:\n{answer}"
 
 
-def get_llm_response(question: str):
-    inputs = tokenizer(f"Question: {question} Answer:", return_tensors="pt")
-    outputs = model.generate(**inputs, max_length=128)
-    return tokenizer.decode(outputs[0], skip_special_tokens=True)
-
-
-def final_answer(question: str):
-    llm_ans = get_llm_response(question)
-    correct = solve_math_question(question)
-
-    if correct is not None and str(correct) not in llm_ans:
-        return f"{correct}\n\n"
-    return f"{llm_ans}"
 
