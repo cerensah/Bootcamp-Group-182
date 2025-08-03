@@ -137,10 +137,11 @@ Matematik problemleri çözmeye yeni başlayan ilkokul öğrencileri
 
 <br/>
 
-- 80 puan - Wolfram Alpha API eklenmesi ile cevap kalitesinin arttırılması
+- 80 puan - Wolfram Alpha API eklenmesi ile cevap kalitesinin arttırılması 
   
 - 50 puan - Filtreler ile yüklenilen fotoğrafların kaltesinini arttırılması
 
+- 10 puan - Matematik dışındaki sorulara cevap vermemesi için kelime filtesi eklenmesi
 
 
 ### Ürün Durumu ve Board Screenshot:
@@ -168,7 +169,7 @@ Matematik problemleri çözmeye yeni başlayan ilkokul öğrencileri
   - Sprint Review Katılımcıları: Ceren Şahin
        
 ### Sprint Retrospective:
-  - Wolfram Alpha eklenilmesi ile kendi kendime yaptığım LLM'in yetersiz kaldığı görüldü ve Wolfram ile tamamlanmaya karar verildi
+  - Wolfram Alpha eklenilmesi ile kendi kendime yaptığım LLM'in yetersiz kaldığı görüldü ve Wolfram ile tamamlanmaya karar verildi. Ayrıca daha çeşitli matematik sorularına da cevap verebildiği görüldü. 
   - Uygulama HugginFace Spaces'e eklenmeye çalışıldı ancak error'ler çözülemedi (https://huggingface.co/spaces/acsah00/MathSolver)
 
 </details>
