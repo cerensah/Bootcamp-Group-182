@@ -128,8 +128,48 @@ Matematik problemleri çözmeye yeni başlayan ilkokul öğrencileri
 
 </details>
 
-## Sprint 3 için planlar (Total 160 puan):
+</details>
 
-- 50 puan - Excel dosyasındaki soru ve cevapları arttırmak. Ayrıca data çeşitliğini arttırarak farklı dillerde (türkçe, ingilizce ve belki fransızca) çalışmasını sağlamak
-- 70 puan - Cevap kalitesini arttırmak için python için ve farklı bilgi motorlarını karıştırmak
-- 40 puan - Kullanıcının sorduğu konulara göre, çalışabilmesi için yeni soru önerilerinde bulunmak
+### Sprint 3 - Total 130 puan:
+<details>
+
+<summary> Sprint 3 - Detaylar İçin Tıklayın </summary>
+
+<br/>
+
+- 80 puan - Wolfram Alpha API eklenmesi ile cevap kalitesinin arttırılması
+  
+- 50 puan - Filtreler ile yüklenilen fotoğrafların kaltesinini arttırılması
+
+
+
+### Ürün Durumu ve Board Screenshot:
+
+  <p align="center">
+  <img src="https://github.com/cerensah/Bootcamp-Group-182/blob/main/sprint3_urunDurumu.png" width="750" />
+  <br>
+  <em> Yazılı prompt ile Wolfram Alpha'ya soru sorma.</em>
+</p>
+
+
+<br/>
+
+
+  <p align="center">
+  <img src="https://github.com/cerensah/Bootcamp-Group-182/blob/main/backlog3.png" width="750" />
+  <br>
+  <em> Sprint 3 Backlog.</em>
+</p>
+
+
+### Sprint Review:
+  - Wolfram Alpha ile cevap kalitesi yükseldiği görüldü
+
+  - Sprint Review Katılımcıları: Ceren Şahin
+       
+### Sprint Retrospective:
+  - Wolfram Alpha eklenilmesi ile kendi kendime yaptığım LLM'in yetersiz kaldığı görüldü ve Wolfram ile tamamlanmaya karar verildi
+  - Uygulama HugginFace Spaces'e eklenmeye çalışıldı ancak error'ler çözülemedi (https://huggingface.co/spaces/acsah00/MathSolver)
+
+</details>
+
