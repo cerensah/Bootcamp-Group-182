@@ -130,7 +130,7 @@ Matematik problemleri çözmeye yeni başlayan ilkokul öğrencileri
 
 </details>
 
-### Sprint 3 - Total 130 puan:
+### Sprint 3 - Total 140 puan:
 <details>
 
 <summary> Sprint 3 - Detaylar İçin Tıklayın </summary>
